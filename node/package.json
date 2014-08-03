@@ -1,0 +1,7 @@
+{
+  "devDependencies": {},
+  "dependencies": {
+    "firebase": "^1.0.18",
+    "write-good": "^0.7.0"
+  }
+}
