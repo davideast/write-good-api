@@ -1,10 +1,12 @@
 var Firebase = require('firebase'),
-  writeGood = require('write-good');
+  writeGood = require('write-good'),
+  async = require('async');
 
 var fbRef = new Firebase('https://write-good.firebaseio.com/');
 
 fbRef.child('input').on('value', function (snapshot) {
-  var input = snapshot.val();
-  var suggestions = writeGood(input);
-  fbRef.child('output').set(suggestions);
+  async.each([snapshot.val()], function (input, callback) {
+    fbRef.child('output').set(writeGood(input));
+    callback();
+  });
 });
